@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:text="Show all employee"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_margin="20dp"
+        android:id="@+id/btnShowEmp"/>
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:text="Register employee"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_margin="20dp"
+        android:id="@+id/btnRegisterEmp"/>
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:text="Search employee"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_margin="20dp"
+        android:id="@+id/btnSearchEmp"/>
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:text="update/delete employee"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_margin="20dp"
+        android:id="@+id/btnUpdateEmp"/>
+
+</LinearLayout>
