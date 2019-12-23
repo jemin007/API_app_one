@@ -30,7 +30,7 @@
         android:id="@+id/etEmpNo_UpdateTwo"
         android:layout_width="350dp"
         android:layout_height="50dp"
-        android:hint="Employee No."
+        android:hint="Employee Name"
         android:textSize="20sp"
         android:layout_margin="20dp"
         android:layout_gravity="center"/>
