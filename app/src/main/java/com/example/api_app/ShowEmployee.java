@@ -1,6 +1,8 @@
 package com.example.api_app;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.api_app.API.EmployeeAPI;
+import com.example.api_app.Recycler.EmployeeAdapter;
 import com.example.api_app.model.Employee;
 import com.example.api_app.url.URL;
 
@@ -19,22 +22,20 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.example.api_app.url.URL.createInstance;
+
 public class ShowEmployee extends AppCompatActivity {
-    TextView txtMain;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_employee);
 
-        txtMain = findViewById(R.id.txtMain);
+        recyclerView = findViewById(R.id.txtMain);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(URL.base_url)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        EmployeeAPI employeeAPI = retrofit.create(EmployeeAPI.class);
+        createInstance();
+        EmployeeAPI employeeAPI = URL.createInstance().create(EmployeeAPI.class);
 
         Call<List<Employee>> listCall = employeeAPI.getAllEmployees();
 
@@ -51,14 +52,11 @@ public class ShowEmployee extends AppCompatActivity {
 
                 List<Employee> employeeList = response.body();
 
-                for (Employee emp : employeeList) {
-                    String data ="";
-                    data += " Name is: " + emp.getEmployee_name() + "\n";
-                    data += " Salary is: " + emp.getEmployee_salary() + "\n";
-                    data += "---------------------" + "\n";
+                EmployeeAdapter employeeAdapter = new EmployeeAdapter(ShowEmployee.this,employeeList);
+                recyclerView.setAdapter(employeeAdapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(ShowEmployee.this));
 
-                    txtMain.append(data);
-                }
+
             }
 
             @Override

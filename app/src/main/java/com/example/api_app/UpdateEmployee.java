@@ -19,13 +19,15 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.example.api_app.url.URL.createInstance;
+
 public class UpdateEmployee extends AppCompatActivity {
 
     private EditText etEmpNo_Update, etEmpNo_UpdateTwo, etEmpSal_Update, etEmpAge_Update;
     private Button btnSearchEmp_Update, btnUpdateEmp_Update, btnDeleteEmp_Update;
 
-    Retrofit retrofit;
-    EmployeeAPI employeeAPI;
+//    Retrofit retrofit;
+//    EmployeeAPI employeeAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,16 +65,10 @@ public class UpdateEmployee extends AppCompatActivity {
 
     }
 
-    private void CreateInstance(){
-         retrofit = new Retrofit.Builder()
-                .baseUrl(URL.base_url)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        employeeAPI = retrofit.create(EmployeeAPI.class);
-    }
 
     private void loadData(){
-        CreateInstance();
+        createInstance();
+        EmployeeAPI employeeAPI = URL.createInstance().create(EmployeeAPI.class);
         Call<Employee> listCall = employeeAPI.getEmployeeID(Integer.parseInt(etEmpNo_Update.getText().toString()));
 
         listCall.enqueue(new Callback<Employee>() {
@@ -91,7 +87,8 @@ public class UpdateEmployee extends AppCompatActivity {
     }
 
     private void updateEmployee(){
-        CreateInstance();
+        createInstance();
+        EmployeeAPI employeeAPI = URL.createInstance().create(EmployeeAPI.class);
         EmployeeCUD employee = new EmployeeCUD(
                 etEmpNo_UpdateTwo.getText().toString(),
                 Float.parseFloat(etEmpSal_Update.getText().toString()),
@@ -114,7 +111,8 @@ public class UpdateEmployee extends AppCompatActivity {
     }
 
     private void deleteEmployee(){
-        CreateInstance();
+        createInstance();
+        EmployeeAPI employeeAPI = URL.createInstance().create(EmployeeAPI.class);
         Call<Void> voidCall = employeeAPI.deleteEmployee(Integer.parseInt(etEmpNo_Update.getText().toString()));
 
         voidCall.enqueue(new Callback<Void>() {

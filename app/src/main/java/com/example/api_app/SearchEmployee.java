@@ -21,6 +21,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.example.api_app.url.URL.createInstance;
+
 public class SearchEmployee extends AppCompatActivity {
 
     private EditText etEmpNo;
@@ -47,12 +49,8 @@ public class SearchEmployee extends AppCompatActivity {
 
     }
     private void loadData(){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(URL.base_url)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        EmployeeAPI employeeAPI = retrofit.create(EmployeeAPI.class);
+        createInstance();
+        EmployeeAPI employeeAPI = URL.createInstance().create(EmployeeAPI.class);
 
         Call<Employee> listCall = employeeAPI.getEmployeeID(Integer.parseInt(etEmpNo.getText().toString()));
 
